@@ -1,0 +1,371 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Light Theme (Default) */
+    --bg-main: #f0f4f8;
+    --text-main: #1e293b;
+    --text-sec: #64748b;
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --card-border: rgba(255, 255, 255, 0.4);
+    --accent: #6366f1;
+    --accent-glow: rgba(99, 102, 241, 0.2);
+    --success: #10b981;
+    --danger: #ef4444;
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+}
+
+.dark-theme {
+    --bg-main: #0f172a;
+    --text-main: #f8fafc;
+    --text-sec: #94a3b8;
+    --card-bg: rgba(30, 41, 59, 0.6);
+    --card-border: rgba(255, 255, 255, 0.05);
+    --accent: #818cf8;
+    --accent-glow: rgba(129, 140, 248, 0.15);
+    --success: #34d399;
+    --danger: #f87171;
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    transition: var(--transition);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Base UI & Typography */
+h1, h2, h3 { font-weight: 600; }
+a { text-decoration: none; color: inherit; }
+button { 
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition); 
+}
+
+/* Navbar */
+.navbar {
+    padding: 1rem 2rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--card-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.logo span {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.icon-btn {
+    background: transparent;
+    color: var(--text-main);
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.icon-btn:hover { background: var(--accent-glow); }
+
+/* Main Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.hero {
+    text-align: center;
+    margin: 3rem 0;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    background: linear-gradient(135deg, var(--text-main), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+}
+.hero span { color: var(--accent); }
+.hero p { color: var(--text-sec); font-size: 1.1rem; }
+
+/* Filter & Controls Panel - Glassmorphism */
+.glass-panel {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 16px;
+    border: 1px solid var(--card-border);
+    box-shadow: var(--glass-shadow);
+    padding: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: var(--bg-main);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    flex: 1;
+    min-width: 250px;
+    gap: 0.5rem;
+    border: 1px solid var(--card-border);
+    transition: var(--transition);
+}
+.search-box:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-glow);
+}
+.search-box input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-main);
+    font-size: 1rem;
+    width: 100%;
+}
+.search-box input::placeholder { color: var(--text-sec); }
+
+.filters {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: var(--bg-main);
+    color: var(--text-main);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.filter-btn:hover { background: var(--accent-glow); }
+
+.filter-btn.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.sorting {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+.sort-label { color: var(--text-sec); font-weight: 500; }
+.custom-select {
+    background: var(--bg-main);
+    color: var(--text-main);
+    border: 1px solid var(--card-border);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    outline: none;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* Grid layout */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Coin Card Glassmorphism */
+.coin-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--glass-shadow);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.coin-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px var(--accent-glow);
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.coin-identity {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.coin-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: contain;
+}
+
+.coin-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.coin-symbol {
+    font-size: 0.85rem;
+    color: var(--text-sec);
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.coin-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.coin-change {
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+.change-up { color: var(--success); background: rgba(16, 185, 129, 0.1); }
+.change-down { color: var(--danger); background: rgba(239, 68, 68, 0.1); }
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-sec);
+    border-top: 1px solid var(--card-border);
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+}
+
+.fav-btn {
+    background: transparent;
+    color: var(--text-sec);
+    padding: 0.4rem;
+    border-radius: 50%;
+}
+.fav-btn:hover { background: var(--bg-main); color: var(--danger); }
+.fav-btn.active { color: var(--danger); }
+.fav-btn.active i { fill: var(--danger); animation: heartbeat 0.3s ease-in-out; }
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+/* Loading & States */
+.state-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 0;
+    color: var(--text-sec);
+    gap: 1rem;
+}
+.state-container.active { display: flex; }
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--card-border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.error-icon { color: var(--danger); width: 48px; height: 48px; }
+.primary-btn {
+    background: var(--accent);
+    color: white;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-sec);
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* Theme Icons Toggle */
+.dark-theme .moon-icon { display: none; }
+.dark-theme .sun-icon { display: block; }
+body:not(.dark-theme) .sun-icon { display: none; }
+body:not(.dark-theme) .moon-icon { display: block; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .glass-panel { flex-direction: column; align-items: stretch; }
+    .hero h2 { font-size: 2.2rem; }
+    .filters { justify-content: space-between; }
+    .filter-btn { flex: 1; justify-content: center; text-align: center; }
+}

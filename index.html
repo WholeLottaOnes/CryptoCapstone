@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CryptoCapstone - A premium cryptocurrency tracker">
+    <title>CryptoCapstone | Live Market Data</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i data-lucide="hexagon" class="logo-icon"></i>
+                <h1>Crypto<span>Capstone</span></h1>
+            </div>
+            <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">
+                <i data-lucide="sun" class="sun-icon"></i>
+                <i data-lucide="moon" class="moon-icon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Hero Section -->
+        <header class="hero">
+            <h2>Track Cryptocurrencies in <span>Real-Time</span></h2>
+            <p>Live data, advanced filtering, and a seamless interface. Welcome to the future of crypto-tracking.</p>
+        </header>
+
+        <!-- Controls Area -->
+        <div class="controls-panel glass-panel">
+            <div class="search-box">
+                <i data-lucide="search"></i>
+                <input type="text" id="search-input" placeholder="Search by coin name or symbol...">
+            </div>
+
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All Coins</button>
+                <button class="filter-btn" data-filter="gainers">Top Gainers (24h)</button>
+                <button class="filter-btn" data-filter="losers">Top Losers (24h)</button>
+                <button class="filter-btn" data-filter="favorites">
+                    <i data-lucide="heart" class="icon-small"></i> Favorites
+                </button>
+            </div>
+
+            <div class="sorting">
+                <span class="sort-label">Sort By:</span>
+                <select id="sort-select" class="custom-select">
+                    <option value="market_cap_desc">Market Cap: High to Low</option>
+                    <option value="market_cap_asc">Market Cap: Low to High</option>
+                    <option value="price_desc">Price: High to Low</option>
+                    <option value="price_asc">Price: Low to High</option>
+                    <option value="name_asc">Name: A to Z</option>
+                    <option value="name_desc">Name: Z to A</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Feedback & Loading -->
+        <div id="loading-state" class="state-container active">
+            <div class="spinner"></div>
+            <p>Fetching market data...</p>
+        </div>
+
+        <div id="error-state" class="state-container">
+            <i data-lucide="alert-triangle" class="error-icon"></i>
+            <p id="error-message">Failed to load data.</p>
+            <button id="retry-btn" class="primary-btn">Try Again</button>
+        </div>
+
+        <!-- Data Grid -->
+        <div id="crypto-grid" class="grid-container">
+            <!-- Dynamic Cards will be injected here -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 CryptoCapstone Project. Built with vanilla JS & CSS.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

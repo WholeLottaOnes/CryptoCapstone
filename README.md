@@ -1,39 +1,41 @@
-# 💰 Crypto Tracker
+# 💰 CryptoCapstone
 
 ## 📌 Overview
-
-Crypto Tracker is a web application that allows users to view real-time cryptocurrency data using a public API. Users can search, filter, and sort cryptocurrencies based on different metrics.
+CryptoCapstone is a modern, responsive web application that tracks real-time cryptocurrency data. It utilizes a public API to display live market metrics and features advanced filtering, sorting, and searching capabilities. Designed with a premium "glassmorphism" aesthetic, it supports both dark and light themes seamlessly.
 
 ## 🚀 Features
-
-* View top cryptocurrencies in real time
-* Search coins by name
-* Filter coins by price range
-* Sort by market cap, price, and percentage change
-* Dynamic UI with color indicators (green/red for price changes)
+* **Real-time Data:** Fetches live cryptocurrency market data directly from the CoinGecko API.
+* **Search:** Quickly find coins by name or ticker using debounced search. 
+* **Filter:** View Top Gainers, Top Losers, or just your personalized "Favorites" lists.
+* **Sort:** Arrange coins by Market Cap, Price, or Alphabetical Order (Ascending / Descending).
+* **Favorites:** Save your favorite coins locally in your browser to check them effortlessly.
+* **Premium UI:** Hand-crafted Vanilla CSS with CSS Variables, Dark Mode / Light Mode toggle, Grid Layouts, and Glassmorphism design elements.
+* **Responsive State Handling:** Loading spinners and error fallback mechanisms.
 
 ## 🔗 API Used
-
-* CoinGecko API (free public crypto API)
+* CoinGecko API (`/api/v3/coins/markets`)
 
 ## 🛠️ Technologies Used
-
-* HTML
-* CSS (Tailwind CSS)
-* JavaScript (Fetch API, Array HOFs)
+* **HTML5:** Semantic structure and layout.
+* **CSS3:** Custom properties (variables), Flexbox, Grid, transitions, animations. No external UI frameworks used.
+* **JavaScript (ES6+):** Async/Await for API fetching, LocalStorage, Array Higher-Order Functions (`map`, `filter`, `sort`), debouncing.
+* **Lucide Icons:** Clean, modern SVG icons.
 
 ## ▶️ How to Run
+1. Clone the repository locally: `git clone https://github.com/shauryanegi099/CryptoCapstone.git`
+2. Open `index.html` in any modern web browser or use a tool like VS Code Live Server.
+3. No API key or backend required! The app is entirely client-side.
 
-1. Clone the repository
-2. Open index.html in your browser
-3. No API key required
+## 📅 Project Milestones Addressed
+- **Milestone 1:** Project setup, foundation, defining requirements, GitHub repo setup and this README.
+- **Milestone 2:** API integration, responsive visual grid structure, and handling of loading states.
+- **Milestone 3 (Core Features):** Added search, custom filtering (gainers/losers/favorites), dynamic sorting, dark mode toggling, using pure Array Higher-Order Functions as per requirements.
+- **Milestone 4:** Full documentation via README, refactored and cleanly written modular vanilla codebase.
 
-## 📅 Milestones
+## 🌟 Bonus Features Implemented
+- **Debouncing:** Applied to the search input to limit excessive execution and repetitive API lookups (or DOM renders).
+- **Local Storage:** Used for saving explicit user preferences such as Dark Mode theme and Favorite Coins.
+- **Loading Indicators:** A visual spinner gives the user immediate feedback during any data fetch cycles.
 
-* Milestone 1: Project setup and planning
-* Milestone 2: API integration
-* Milestone 3: UI + filtering + sorting
-
-## 🔗 Repository
-
-[https://github.com/shauryanegi099/capstone2.git](https://github.com/shauryanegi099/capstone2.git)
+## 🫂 Author
+Shaurya Negi
