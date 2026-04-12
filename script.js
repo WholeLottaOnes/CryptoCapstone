@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const themeToggleBtn = document.getElementById("theme-toggle");
 
     // === State Variables ===
-    // === State Variables ===
     let cryptoData = [];
     let favorites = JSON.parse(localStorage.getItem("crypto_favorites")) || [];
     let currentFilter = "all"; // all, gainers, losers, favorites
