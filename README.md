@@ -33,9 +33,12 @@ CryptoCapstone is a modern, responsive web application that tracks real-time cry
 - **Milestone 4:** Full documentation via README, refactored and cleanly written modular vanilla codebase.
 
 ## 🌟 Bonus Features Implemented
-- **Debouncing:** Applied to the search input to limit excessive execution and repetitive API lookups (or DOM renders).
-- **Local Storage:** Used for saving explicit user preferences such as Dark Mode theme and Favorite Coins.
-- **Loading Indicators:** A visual spinner gives the user immediate feedback during any data fetch cycles.
+- **Debouncing:** Applied to the search input to limit excessive execution and repetitive API lookups.
+- **Throttling:** Implemented on the window scroll event for a high-performance "Scroll to Top" button.
+- **Pagination:** Structured large data sets into manageable pages for better performance and UX.
+- **Local Storage:** Used for saving user preferences such as Dark Mode theme and Favorite Coins.
+- **Loading Indicators:** A visual spinner gives immediate feedback during data fetch cycles.
+- **Progressive Web App (PWA):** Fully installable with offline support via Service Workers and a Manifest file.
 
 ## 🫂 Author
 Shaurya Negi

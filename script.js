@@ -14,10 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const themeToggleBtn = document.getElementById("theme-toggle");
 
     // === State Variables ===
+    // === State Variables ===
     let cryptoData = [];
     let favorites = JSON.parse(localStorage.getItem("crypto_favorites")) || [];
     let currentFilter = "all"; // all, gainers, losers, favorites
     let currentSort = "market_cap_desc";
+    let currentPage = 1;
+    const itemsPerPage = 20;
 
     // === API Config ===
     const API_URL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
@@ -76,17 +79,57 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // 4. Map to HTML Strings
-        const htmlStrings = processedData.map(coin => createCoinCard(coin));
+        // 4. Pagination
+        const totalPages = Math.ceil(processedData.length / itemsPerPage);
+        const paginatedData = processedData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+        // 5. Map to HTML Strings
+        const htmlStrings = paginatedData.map(coin => createCoinCard(coin));
         
         // Display
         if (processedData.length === 0) {
             grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-sec)">No coins found matching your criteria.</p>`;
+            document.getElementById("pagination-controls").innerHTML = '';
         } else {
             grid.innerHTML = htmlStrings.join("");
+            renderPagination(totalPages);
             lucide.createIcons(); // Re-initialize icons for new DOM elements
             attachFavoriteListeners();
         }
+    }
+
+    // Pagination Renderer
+    function renderPagination(totalPages) {
+        const paginationContainer = document.getElementById("pagination-controls");
+        if(totalPages <= 1) {
+            paginationContainer.innerHTML = '';
+            return;
+        }
+
+        let html = '<div class="pagination">';
+        html += `<button class="page-btn prev-next" data-page="${currentPage - 1}" ${currentPage === 1 ? 'disabled' : ''}><i data-lucide="chevron-left"></i> Prev</button>`;
+        
+        for(let i = 1; i <= totalPages; i++) {
+            html += `<button class="page-btn ${currentPage === i ? 'active' : ''}" data-page="${i}">${i}</button>`;
+        }
+        
+        html += `<button class="page-btn prev-next" data-page="${currentPage + 1}" ${currentPage === totalPages ? 'disabled' : ''}>Next <i data-lucide="chevron-right"></i></button>`;
+        html += '</div>';
+
+        paginationContainer.innerHTML = html;
+        
+        // attach listeners
+        const pageBtns = paginationContainer.querySelectorAll('.page-btn');
+        pageBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const page = parseInt(e.currentTarget.dataset.page);
+                if (page > 0 && page <= totalPages && page !== currentPage) {
+                    currentPage = page;
+                    renderUI();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        });
     }
 
     // Component Renderer
@@ -96,7 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const changeClass = change >= 0 ? 'change-up' : 'change-down';
         const changeIcon = change >= 0 ? 'trending-up' : 'trending-down';
 
-        // Format currency softly
         const formattedPrice = new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
@@ -146,6 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
     searchInput.addEventListener("input", (e) => {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => {
+            currentPage = 1;
             renderUI();
         }, 400); // 400ms debounce
     });
@@ -159,6 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
             // Logic state
             currentFilter = e.currentTarget.dataset.filter;
+            currentPage = 1;
             renderUI();
         });
     });
@@ -166,6 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Sort Dropdown
     sortSelect.addEventListener("change", (e) => {
         currentSort = e.target.value;
+        currentPage = 1;
         renderUI();
     });
 
@@ -234,5 +279,44 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     function showError() {
         errorState.classList.add("active");
+    }
+
+    // === Scroll to Top with Throttling (Bonus) ===
+    const scrollTopBtn = document.getElementById('scroll-top-btn');
+    
+    function throttle(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        }
+    }
+
+    window.addEventListener('scroll', throttle(() => {
+        if (window.scrollY > 300) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    }, 200));
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // === Register Service Worker (PWA Bonus) ===
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js').then(registration => {
+                console.log('SW registered!', registration.scope);
+            }).catch(error => {
+                console.log('SW registration failed:', error);
+            });
+        });
     }
 });
