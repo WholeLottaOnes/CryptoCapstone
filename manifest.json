@@ -1,0 +1,17 @@
+{
+  "name": "CryptoCapstone Tracker",
+  "short_name": "CryptoCap",
+  "description": "A premium cryptocurrency tracker with real-time data.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#818cf8",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2091/2091665.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
