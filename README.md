@@ -41,4 +41,4 @@ CryptoCapstone is a modern, responsive web application that tracks real-time cry
 - **Progressive Web App (PWA):** Fully installable with offline support via Service Workers and a Manifest file.
 
 ## 🫂 Author
-Shaurya Negi
+prathem verma
